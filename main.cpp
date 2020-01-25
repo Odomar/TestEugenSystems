@@ -10,6 +10,7 @@ int main(int argc, char const *argv[])
 	vector<string> vec;
 	smatch res;
 	string str(argv[1]);
+	int a, b;
 
 	while(regex_search (str, res, reg)){
 		vec.push_back(res[0].str());
@@ -19,7 +20,26 @@ int main(int argc, char const *argv[])
 		cout << argv[1] << endl;
 	}
 	else {
-		cout << vec[0] << " " << vec[2] << endl;
+		int idx = (vec.size() - 1) / 2;
+		// cerr << vec[idx] << endl;
+		sscanf(vec[idx].c_str(), "(%d;%d)", &a, &b);
+		if(a > b) {
+			cout << vec[0] << " " << vec[vec.size() - 1] << endl;
+		}
+		else if (a % 2 == b % 2) {
+			for (int i = 0; i < vec.size(); i++) {
+				if (i != idx) {
+					cout << vec[i];
+					if (i != vec.size() - 1) {
+						cout  << " ";
+					}
+				}
+			}
+			cout << endl;
+		}
+		else {
+			cout << argv[1] << endl;
+		}
 	}
 
 	
